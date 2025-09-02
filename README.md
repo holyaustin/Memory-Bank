@@ -44,7 +44,7 @@ Built by **@holyaustin**, Memory Bank is a **global digital legacy platform** th
 - 💳 **Filecoin Pay**: $1/month subscription (USDC or card)  
 - 🧩 **Synapse SDK**: Unified interface for storage, payment, retrieval  
 
-No wallet. No seed phrase. Just **phone or email login**.
+No wallet. No seed phrase. Just **phone. social or email login**.
 
 This isn’t Web3 for crypto people.  
 This is **Web3 for humanity**.
@@ -89,9 +89,7 @@ flowchart TD
 
 But if you prefer a static view:
 
-![Architecture Diagram](/docs/diagram/architecture.png)
-
-🔗 **See full architecture**: [/docs/ARCHITECTURE.md](/docs/ARCHITECTURE.md)
+🔗 **See full architecture**: [/docs/ARCHITECTURE.png](/docs/diagrams/architecture.pn)
 
 ---
 
@@ -111,9 +109,9 @@ But if you prefer a static view:
 All design, flow, and business logic is documented for transparency and collaboration:
 
 - 📄 **[Project Overview & Vision](/docs/ABOUT.md)**
-- 📐 **[System Architecture](/docs/ARCHITECTURE.md)**
-- 🧭 **[User Flow (Memory Will)](/docs/USER_FLOW.md)**
-- 📦 **[Data Lifecycle](/docs/DATA_FLOW.md)**
+- 📐 **[System Architecture](/docs/diagrams/architecture.png)**
+- 🧭 **[User Flow (Memory Will)](/docs/diagrams/user_flow.png)**
+- 📦 **[Data Lifecycle](/docs/diagrams/data_flow.png)**
 - 💰 **[Revenue Model & Sustainability](/docs/revenue-model.md)**
 - 💬 **[Feedback to Filecoin Onchain Cloud](/docs/FEEDBACK.md)**
 
@@ -123,8 +121,8 @@ All design, flow, and business logic is documented for transparency and collabor
 
 | Layer | Technology |
 |------|------------|
-| Frontend | React Native, Next.js |
-| Auth | Web3Auth (email/phone) |
+| Frontend | React Native, Next.js (RWA) |
+| Auth | Web3Auth (email/phone) | Onboard | Privy |
 | Encryption | Lit Protocol (client-side) |
 | Storage | FilecoinWarmStorage + PDP |
 | Payments | Filecoin Pay (USDC, Stripe) |
@@ -137,7 +135,7 @@ All design, flow, and business logic is documented for transparency and collabor
 ## 📦 Installation & Setup
 
 ### Prerequisites
-- Node.js v18+
+- Node.js v22+
 - npm or yarn
 - Filecoin FVM Testnet access
 - Synapse SDK API key ([Get here](https://synapse.filecoin.io))
@@ -184,8 +182,9 @@ memory-bank/
 │   ├── USER_FLOW.md
 │   ├── DATA_FLOW.md
 │   └── FEEDBACK.md
-├── /src
+├── /frontend
 ├── /mobile
+├── /mmiddleware
 └── .env.example
 ```
 
@@ -220,22 +219,4 @@ This project is my commitment to building **technology that outlasts us all**.
 MIT — Open for collaboration, contribution, and ecosystem growth.
 ```
 
----
 
-### ✅ Final Notes:
-- **No YouTube link** — removed
-- **Architecture diagram** embedded via `/docs/diagram/architecture.png`
-- **All docs linked** — judges can explore depth
-- **Emotional hook first**, **technical depth second**
-- Ends with **"STILL IN DEVELOPMENT"** in bold caps
-
----
-
-### 📂 Folder Expectation:
-Make sure you have:
-```bash
-/docs/diagram/architecture.png
-```
-If you don’t, I can generate a PNG version of the diagram for you — just say the word.
-
----
