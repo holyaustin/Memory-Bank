@@ -73,7 +73,7 @@ memory-bank/
 
 ### Clone & Install
 ```bash
-git clone https://github.com/memory-bank/memory-bank.git
+git clone https://github.com/holyaustin/memory-bank.git
 cd memory-bank
 npm install
 
@@ -85,23 +85,15 @@ NEXT_PUBLIC_SYNAPSE_API_KEY=your_api_key
 NEXT_PUBLIC_FILECOIN_NETWORK=testnet
 LIT_CLIENT_KEY=your_lit_key
 STRIPE_PUBLIC_KEY=pk_test_...
+
 Run Locally
+
 bash
 npm run dev
 # Open http://localhost:3000
-Build Mobile App
-bash
-cd mobile
-npx react-native run-android
-# or
-npx react-native run-ios
-🧩 Filecoin Onchain Cloud Integration
-Service	Usage
-Synapse SDK	import { upload, pay, retrieve } from '@filecoin/synapse'
-FilecoinWarmStorageService	await synapse.storeWithPDP(file)
-Filecoin Pay	await synapse.pay({ amount: 1, currency: 'USDC' })
-FilCDN	const url = await synapse.getCIDUrl(cid)
-PDP Contracts	Auto-verified monthly via cron job
+
+
+
 
 See /src/lib/foc.js for full integration.
 📎 Project Structure
