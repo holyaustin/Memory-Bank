@@ -89,7 +89,7 @@ flowchart TD
 
 But if you prefer a static view:
 
-🔗 **See full architecture**: [/docs/ARCHITECTURE.png](/docs/diagrams/architecture.pn)
+🔗 **See full architecture**: [/docs/ARCHITECTURE.png](/docs/diagrams/architecture.png)
 
 ---
 
@@ -217,6 +217,6 @@ This project is my commitment to building **technology that outlasts us all**.
 
 ## 📄 License  
 MIT — Open for collaboration, contribution, and ecosystem growth.
-```
+
 
 
