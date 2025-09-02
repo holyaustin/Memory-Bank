@@ -1,0 +1,106 @@
+@startuml
+title Memory Bank: User Journey
+
+skinparam defaultTextAlignment center
+skinparam shadowing false
+
+[*] --> Dashboard
+Dashboard : "Your memories\nare safe"
+
+Dashboard --> Upload
+Upload : "Add Photo, Video,\nor Voice Note"
+
+Upload --> VerifyPrompt
+VerifyPrompt : "Verify this moment?\nOne-tap PDP proof"
+
+VerifyPrompt --> Yes : "Yes"
+Yes --> Verify : "Generating PDP Proof...\nStored on Filecoin"
+Verify --> Success
+
+VerifyPrompt --> No : "No"
+No --> Success
+
+Success : "Memory saved\npermanently"
+
+Success --> SetWillPrompt
+SetWillPrompt : "Share later?\nSet Memory Will"
+
+SetWillPrompt --> YesWill : "Yes"
+YesWill --> HeirSetup
+HeirSetup : "Who gets access?"
+HeirSetup --> Timing
+Timing : "When?\nAt age 18 / 2030"
+Timing --> ConfirmWill
+ConfirmWill : "Will saved\nTime-locked via Lit"
+ConfirmWill --> Continue
+
+SetWillPrompt --> NoWill : "No"
+NoWill --> Continue
+
+Success --> TimeCapsulePrompt
+TimeCapsulePrompt : "Lock for future?\nTime Capsule"
+
+TimeCapsulePrompt --> YesCapsule : "Yes"
+YesCapsule --> CapsuleDate
+CapsuleDate : "Unlock in 2030\nor on event"
+CapsuleDate --> ConfirmCapsule
+ConfirmCapsule : "Time Capsule set"
+ConfirmCapsule --> Continue
+
+TimeCapsulePrompt --> NoCapsule : "No"
+NoCapsule --> Continue
+
+Success --> PublicArchivePrompt
+PublicArchivePrompt : "Add to history?\nPublic Archive"
+
+PublicArchivePrompt --> YesArchive : "Yes"
+YesArchive --> SelectCollection
+SelectCollection : "Choose:\n• War Diaries\n• Climate Protests"
+SelectCollection --> ConfirmArchive
+ConfirmArchive : "Contribution saved\nPDP-verified"
+ConfirmArchive --> Continue
+
+PublicArchivePrompt --> NoArchive : "No"
+NoArchive --> Continue
+
+Continue --> SubscribePrompt
+SubscribePrompt : "Unlock more:\n$1/month"
+
+SubscribePrompt --> Subscribe
+Subscribe : "Pay with\nUSDC or Card"
+Subscribe --> SubSuccess
+SubSuccess : "Premium activated\nAuto-billed monthly"
+SubSuccess --> Done
+
+Done --> [*]
+
+note right of Verify
+  PDP proof ensures
+  content is real
+  and unaltered
+end note
+
+note right of HeirSetup
+  Uses Lit Protocol
+  for time-locked access
+  auto-shared at trigger
+end note
+
+note right of Subscribe
+  Filecoin Pay handles
+  secure, automated billing
+  via Synapse SDK
+end note
+
+note bottom of PublicArchivePrompt
+  Users contribute
+  to collective truth
+  while keeping ownership
+end note
+
+legend right
+  <b>User Journey</b>
+  From upload to legacy setup
+  All in <60 seconds
+endlegend
+@enduml

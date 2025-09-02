@@ -1,0 +1,80 @@
+@startuml
+title Memory Bank: Data Lifecycle
+
+skinparam defaultTextAlignment center
+skinparam shadowing false
+
+[User Device] as A
+[Lit Protocol\nClient-Side] as B
+[Synapse SDK] as C
+[FilecoinWarmStorage\n+ PDP] as D
+[Filecoin Pay\nSubscription] as E
+[Supabase\nMetadata] as F
+[FilCDN\nRetrieval] as G
+[Heir / Viewer] as H
+
+A --> B : 1. File selected\n(photo, video, voice)
+note right of B
+  Encryption happens
+  entirely on device
+  Only user or heir
+  holds decryption key
+end note
+
+B --> C : 2. Send encrypted file\n+ metadata
+note right of C
+  Synapse SDK routes:
+  - Storage → Filecoin
+  - Payment → Filecoin Pay
+  - Metadata → Supabase
+end note
+
+C --> D : 3. Store on Filecoin\n+ PDP commitment
+note right of D
+  Data stored permanently
+  PDP runs monthly
+  to verify no tampering
+end note
+
+C --> E : 4. Bill $1/month\nvia Filecoin Pay
+note right of E
+  Recurring payment
+  in USDC or fiat
+  auto-settled
+end note
+
+C --> F : 5. Save metadata:\n- Access rules\n- Will settings\n- Tags
+note right of F
+  Supabase stores
+  all non-file data
+  for fast queries
+end note
+
+D --> G : 6. CID indexed →\nAvailable via FilCDN
+note right of G
+  FilCDN caches content
+  for fast global access
+  No single point of failure
+end note
+
+G --> H : 7. Request playback\n(viewer or heir)
+note right of H
+  Viewer streams
+  or heir accesses
+  after time/event trigger
+end note
+
+H --> B : 8. Decrypt (if authorized)
+note right of B
+  Lit Protocol decrypts
+  only if:
+  - Correct key
+  - Time condition met
+end note
+
+legend bottom
+  <b>End-to-End Data Flow</b>
+  Secure • Verified • Permanent
+  Powered by Filecoin Onchain Cloud
+endlegend
+@enduml

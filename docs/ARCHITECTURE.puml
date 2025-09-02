@@ -1,0 +1,56 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam shadowing false
+title Memory Bank: System Architecture
+
+[Mobile App\n(React Native)] as A
+[Synapse SDK] as B
+[Lit Protocol\nEncryption/Decryption] as F
+[FilecoinWarmStorage\n+ PDP Proof] as C
+[Filecoin Pay\n$1/month via USDC/Card)] as D
+[Supabase\nUser Metadata & Rules] as G
+[FilCDN\nFast Global Retrieval] as E
+
+A --> B : Upload File\nor Trigger Payment
+B --> F : Encrypt before upload
+F --> C : Store encrypted data\non Filecoin
+C --> E : CID indexed for retrieval
+E --> A : Stream video/audio\nfast playback
+B --> D : Handle subscription\nauto-billing
+B --> G : Save access rules,\nheir settings
+G --> A : Sync metadata\naccess control
+
+note right of F
+  Client-side encryption
+  via Lit Protocol
+  Only user/heir can decrypt
+end note
+
+note right of C
+  Permanent storage
+  PDP runs monthly
+  to verify integrity
+end note
+
+note right of D
+  Recurring billing
+  via Filecoin Pay
+  in USDC or fiat
+end note
+
+note right of E
+  FilCDN enables
+  low-latency access
+  worldwide
+end note
+
+note bottom of G
+  Stores:
+  - User profiles
+  - Will settings
+  - Access rules
+  - Tags & dates
+end note
+
+caption Filecoin Onchain Cloud Integration
+@enduml
