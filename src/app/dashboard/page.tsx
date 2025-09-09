@@ -29,6 +29,7 @@ function DashboardContent() {
         <div className="grid md:grid-cols-2 gap-8">
           <UploadCard />
           <SubscriptionCard />
+          <MemoryWill />
         </div>
       </div>
     </div>

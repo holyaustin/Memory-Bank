@@ -1,9 +1,11 @@
 'use client'
 
 export default function SubscriptionCard() {
-  const subscribe = () => {
-    alert('Redirecting to $1/month subscription...')
-  }
+const subscribe = async () => {
+  const res = await fetch('/api/subscribe', { method: 'POST' })
+  const { url } = await res.json()
+  window.location.href = url
+}
 
   return (
     <div className="bg-white p-6 rounded-xl shadow">
