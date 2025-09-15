@@ -1,17 +1,39 @@
-import { PrivyProvider } from '@privy-io/react-auth'
-import './globals.css'
+// app/layout.tsx
+import React from "react";
+import Provider from "../components/Provider";
+import "./globals.css";
+//import { Inter } from "next/font/google";
+import { headers } from "next/headers";
 
-export default function RootLayout({
+// ✅ SSR: Extract Web3Auth state from cookies
+import { cookieToWeb3AuthState } from "@web3auth/modal";
+
+//const inter = Inter({ subsets: ["latin"] });
+
+export const metadata = {
+  title: "Memory Bank",
+  description: "Your voice. Forever.",
+};
+
+export default async function RootLayout({
   children,
-}: { children: React.ReactNode }) {
+}: {
+  children: React.ReactNode;
+}) {
+  const headersList = await headers();
+  const cookie = headersList.get("cookie");
+  const web3authInitialState = cookieToWeb3AuthState(cookie);
+
   return (
     <html lang="en">
       <body className="bg-white text-gray-800">
-        <PrivyProvider appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID!}>
+ 
           <Header />
-          {children}
+            <Provider web3authInitialState={web3authInitialState}>
+              {children}
+            </Provider>
           <Footer />
-        </PrivyProvider>
+
       </body>
     </html>
   )
@@ -19,7 +41,7 @@ export default function RootLayout({
 
 function Header() {
   return (
-    <header className="bg-primary text-white p-4 shadow">
+    <header className="bg-blue-900 text-white p-4 shadow">
       <div className="container mx-auto flex justify-between items-center">
         <h1 className="text-2xl font-bold">Memory Bank</h1>
         <nav>
