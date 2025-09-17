@@ -2,6 +2,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSynapseClient } from '../../../../lib/synapse-client';
 
+// Add at top of POST
+console.log('📁 API Route Running');
+console.log('🔑 ENV in API:', {
+  hasKey: !!process.env.NEXT_PRIVATE_SYNAPSE_PRIVATE_KEY,
+  keyLength: process.env.NEXT_PRIVATE_SYNAPSE_PRIVATE_KEY?.length,
+});
+
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
@@ -28,8 +35,6 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
-
-    console.error('Upload failed:', error);
     return NextResponse.json(
       { error: 'Upload failed: Unknown error' },
       { status: 500 }

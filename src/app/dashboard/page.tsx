@@ -4,7 +4,6 @@
 import { useWeb3AuthUser, useWeb3AuthDisconnect } from '@web3auth/modal/react';
 import { useAccount } from 'wagmi';
 import { useState } from 'react';
-import { getSynapseClient } from '../../../lib/synapse-client';
 
 export default function Dashboard() {
   const { userInfo } = useWeb3AuthUser();
@@ -14,34 +13,36 @@ export default function Dashboard() {
   const [uploading, setUploading] = useState(false);
   const [cid, setCid] = useState<string | null>(null);
 
-const handleUpload = async () => {
-  if (!file) return;
-  setUploading(true);
-  setCid(null);
+  const handleUpload = async () => {
+    if (!file) return;
+    setUploading(true);
+    setCid(null);
 
-  try {
-    const arrayBuffer = await file.arrayBuffer();
-    const uint8Data = new Uint8Array(arrayBuffer);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
 
-    const synapse = await getSynapseClient();
-    const result = await synapse.storage.upload(uint8Data);
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
 
-    setCid(result.pieceCid.toString()); // ✅ Permanent ID
+      const data = await res.json();
 
-    setFile(null);
-    alert('✅ Memory stored permanently!');
-  } catch (err: unknown) {
-    // ✅ Better error handling
-    if (err instanceof Error) {
-      alert('Upload failed: ' + err.message);
-    } else {
-      alert('Upload failed: Unknown error');
+      if (!res.ok) {
+        throw new Error(data.error || 'Upload failed');
+      }
+
+      setCid(data.pieceCid);
+      setFile(null);
+      alert('✅ Memory stored permanently on Filecoin!');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Upload failed';
+      alert('Upload failed: ' + message);
+    } finally {
+      setUploading(false);
     }
-    console.error(err);
-  } finally {
-    setUploading(false);
-  }
-};
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
