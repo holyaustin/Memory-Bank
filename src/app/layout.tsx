@@ -21,14 +21,15 @@ export default async function RootLayout({
   const cookie = headersList.get("cookie");
   const web3authInitialState = cookieToWeb3AuthState(cookie);
 
-  return (
+   return (
     <html lang="en">
       <body className="bg-white text-gray-800">
-        <Header />
+        {/* ✅ Provider wraps Header, children, AND Footer */}
         <Provider web3authInitialState={web3authInitialState}>
-          {children}
+          <Header />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
         </Provider>
-        <Footer />
       </body>
     </html>
   );
