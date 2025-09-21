@@ -49,6 +49,8 @@ No wallet. No seed phrase. Just **phone. social or email login**.
 This isn’t Web3 for crypto people.  
 This is **Web3 for humanity**.
 
+URL: https://memory-bank-seven.vercel.app/
+
 ---
 
 ## 🚀 Why This Matters
